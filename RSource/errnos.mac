@@ -1,0 +1,20 @@
+         MACRO
+         ERRNOS
+*        ERROR NUMBERS ARE ALLOCATED IN GROUPS IN THE FOLL ORDER
+*        1     THOSE NOT REQUIRING TRACEBACK
+*        2     THOSE NOT NEEDING VARIABLE INFO IN MESSAGE
+*        3     I/O TYPE ERRORS REQUIRING FILENAME IN MESSAGE
+*        4     SVC 32 AND SCRATCH ERRORS REQUIRING RETN CODE
+*        5     PROGRAM INTERRUPT - REQUIRING PSW, REGS, TRACEBACK
+         SPACE
+         ERR   OBJ,COMT,CORE,PARM,                                     X
+               TOVL,                   TIME OVEFLO IN LOADER           X
+               CASE,RANGE,PNTR,STACK,                                  X
+               TOVR,                   TIME OVERFLO IN RUN             X
+               LFDD,                                                   X
+               HALT,INTP,                                              X
+               OPN,RECFM,LRECL,IOE,EOF,MR,MW,NO,RINH,                  X
+               SIN,COS,EXP,SQRT,LOG,ATAN,                              X
+               SVC32,SCR,                                              X
+               INT
+         MEND

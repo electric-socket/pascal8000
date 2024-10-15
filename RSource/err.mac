@@ -1,0 +1,8 @@
+         MACRO
+         ERR
+         LCLA  &I
+.A       ANOP
+&I       SETA  &I+1
+ERR&SYSLIST(&I) EQU   4*&I
+         AIF   (N'&SYSLIST GT &I).A
+         MEND
