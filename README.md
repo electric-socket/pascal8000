@@ -1,6 +1,8 @@
 # Pascal8000
 Conversion of the mainframe IBM 370-based Pascal compiler to run under Free Pascal
 
+It also includes the mainframe-related components.
+
 There are two flavors of this compiler, the Linkage Editor edition, and the Load-and-go edition. The load-and-go version compiles a program then immediately executes it. The Linkage Editor edition acts more like a typical compiler, it creates a load module, which can call external programs if needed, then link edited to form an executable. I had decided to focus on the latter, a compiler that makes actual modules that can be link edited and run independently. My objective was to make as few changes as possible, to keep the compiler "clean enough"  that the one I modified can recompile itself, at least, the original one. The code it produces is for the IBM 370, not the PC. If you have the Hercules mainframe emulator with MVS 3.8J and TK5, or the Z390 Mainframe Studio, you could run it there. (Actually, there already is a copy of Pascal 8000 on TK5; I have some JCL that could be copied to it and used there to run programs on that machine.)
 
 My interest in this compiler is more than academic; I am interested in two of its features, ones that were common on older compilers but tend to be missing now. 
@@ -28,16 +30,18 @@ A few others I've noticed:
 * More intrinsic functions, ones where a procedure or function call is replaced by the instruction it represents, e.g. inc(x) translated into effectively ++x, i.e. X := X+1.
 * When using a variable or constant in another unit, be able to explicitly reference the item by its unit name, i.e. X in unit There, can also be referenced in another unit as "X" (if there's no other local variable of the same name, either inside a procedure or function where the reference is made, or at Unit level, or a intermediate unit compiled after there), or as "There.X"
 
+
 # Files                             .
 * As Pascal8000 has two versions, there are two different compilers, *Pascal8000LinkEdit.pas* for the Linkage Editor-capable version, and *Pascal8000LoadGo.pas* for the compile-and-go version. There are also separate run-time systems and initialization for each. It is kind of amazing to think that they developed a compiler that can read and scan a program, create a binary objevt file (or set up the environment to run the code it created) and produce a listing, all in less than 7000 lines of source code.
 * The file *$pasmsgs.txt* is the error message file used by the compiler.
 * The file *AAEC B1107.pdf* is the October, 1979 montly newsletter for a European computer center. Page 13 has an article about Pascal 8000.
 * The file *Pascal8000.pdf* is the reference manual for the compiler.
-* The directory *rsource* contains the assembly language support files for Pascal8000 programs. The *.asm files are the assembly language sources for run-time support, and the *.mac files are macros they use.
+* The directory *rsource* contains the assembly language support files for Pascal8000 programs. That is not a misspelling, the original PDS (mainframe equivalent of a subdirectory) was *Pascal.rsource*. The *.asm files are the assembly language sources for run-time support, and the *.mac files are macros they use.
 * The group of files named *AAEC_COMPILER* are my attempts to make the Linkage Editor Version successfully compile under Free Pascal. At this time it does not work because I stopped to create this release. Some things on it are temporary placeholders for things that actually do things, like opening files or producing the date and time.
 * The *.jcl files are the original OS/VS1 and MVS job control language files to download and install the compiler.
-
-
+* The file *Pascal8000B.het* is the tape contaning the entire system, and all sources. It can be read by MVS TK5 on Hercules.
+* The file *Linkedit.obj* is the binary object file of the linkage editor version of the compiler. It can be link edited with the run-time library to rebuild the compiler.
+* The file *Loadgo.obj*  is the binary object file of the linkage editor version of the compiler. It can be link edited with the run-time library to rebuild the compiler.
 
  
 # Ownership
