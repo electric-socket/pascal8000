@@ -56,6 +56,7 @@
 // (*0054*)     PROGRAM COMPILER(INPUT,OUTPUT,$PASMSGS,SYSGO);
 (*0054*)     PROGRAM AAEC_COMPILER(INPUT,OUTPUT,_PASMSGS,SYSGO);
 (*0055*)(* $L+,P-,T-,N-,U-*)
+uses sysutils; // time and date
 (*0056*) 
 (*0057*) 
 (*0058*)LABEL 9999;
@@ -142,8 +143,9 @@
 (*0501*)      'ZAP ', 'CP  ', 'AP  ', 'SP  ', 'MP  ', 'DP  ', '    ', '    ');
 (*0502*)  LRW: ARRAY (.0..ALFALENG.) OF 0..RESWORDS=( 0, 0, 6, 14, 22,
                                                     29, 34, 35, 38 );
-TYPE
-(*0107*)   ALFA = String[ALFALENG];
+ TYPE
+(*0107*)    ALFA = PACKED ARRAY(.1..ALFALENG.) OF CHAR;
+
 CONST
           RW:  ARRAY (.1..RESWORDS.) OF ALFA=
 (*0504*)       ('IF      ', 'DO      ', 'OF      ', 'TO      ', 'IN      ', 'OR      ',
@@ -217,37 +219,52 @@ TYPE
 
 // CONST
 // Can't preload these buffers, the IBM is a big endian EBCDIC machine
-// initialize in code
+// [initialize in code] no, just postfix before writing
 //
 VAR
-    ESD : ESDBUF;
-    RLD : RLDBUF;
-    TXT : TXTBUF;
-    ENDC: ENDBUF;
-(*0402  ESD : ESDBUF=        MAIN ESD BUFFER
-  0531       (' ESD    ',16,1,'P@MAIN@V',0,0,
-  0532                         '        ',0,0,
-  0533                         '        ',0,0,'        ', '        ' );
-  0534
-  0535
-  0536
-  0401  RLD : RLDBUF=        MAIN RLD BUFFER
-  0537        ( ' RLD    ',0,'    ',0,0,0,0,0,0,0,0,0,0,0,0,0,0,'        ');
-  0403  TXT : TXTBUF=        MAIN TEXT BUFFER
-  0538        ( ' TXT',0,0,0,   0,0,0,0,
-  0539                           0,0,0,0,
-  0540                           0,0,0,0,
-  0541                           0,0, '        ' );
-  0542*)
-(*0543*)
-(*0404  ENDC: ENDBUF=         MAIN END BUFFER
-  0544           (' END                        ',0,
-  0545            '                                                ' #);
-  0547
-  0548*
-  *0549
- 0463*)
- CONST
+    //ESD : ESDBUF;
+
+      
+    RLD : RLDBUF=       // MAIN RLD BUFFER
+          (prelude:' RLD    '; bytes:0; dummy: '    ';
+              rlditems:((relpos:0; flagaddress: 0),
+                       (relpos:0; flagaddress: 0),
+                       (relpos:0; flagaddress: 0),
+                       (relpos:0; flagaddress: 0),
+                       (relpos:0; flagaddress: 0),
+                       (relpos:0; flagaddress: 0),
+                       (relpos:0; flagaddress: 0));
+              seqnos:'        ');
+
+(*0402*)  ESD : ESDBUF =       // MAIN ESD BUFFER
+               (prelude:' ESD    '; bytes:16; id: 1;
+               dataitem:((name:'P@MAIN@V'; address:0; length:0),
+                         (name:'        '; address:0; length:0),
+                         (name:'        '; address:0; length:0));
+                       filler: '        '; seqnos:'        ' );
+
+
+
+   TXT : TXTBUF=       // MAIN TEXT BUFFER
+         (prelude: ' TXT'; address:0; length:0; id:0;
+           textdata:(0, 0, 0, 0, 0, 0, 0,
+                     0, 0, 0, 0, 0, 0, 0);
+                   seqnos:'        ' );
+
+(*0538  TXT := (#' TXT',0,0,0,   0,0,0,0,
+                          0,0,0,0,
+                         0,0,0,0,
+                          0,0, '        ' #);
+ *)
+
+
+
+  ENDC: ENDBUF=     //    MAIN END BUFFER
+             (prelude:' END                        '; length: 0;
+              pstlude:'                                                ' );
+
+
+
  PROCADDRESS : ARRAY (.1..MAXPR1.) OF INTEGER=
 (*0550*)               (  0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
           (*0551*)        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -272,16 +289,16 @@ TYPE
   (*0120*)        THENSY,PROGRAMSY,EXPONOP,OTHERSY);
 
 CONST
-(*0511*) RSY: ARRAY (.1..RESWORDS.) OF SYMBOL =
-               ( IFSY,     DOSY,     OFSY,     TOSY,     RELOP,    ADDOP,
-(*0512*)         ENDSY,    FORSY,    VARSY,    MULOP,    MULOP,    SETSY,
-(*0513*)         MULOP,    NOTSY,    THENSY,   ELSESY,   WITHSY,   GOTOSY,
-          (*0514*)         CASESY,   TYPESY,   FILESY,   LOOPSY,   BEGINSY,  UNTILSY,
-          (*0515*)         WHILESY,  ARRAYSY,  CONSTSY,  LABELSY,  VALUESY,  REPEATSY,
-          (*0516*)         RECORDSY, DOWNTOSY, PACKEDSY, FORALLSY, PROGRAMSY,FUNCTSY,
-          (*0517*)         POSTSY,   PROCSY );
-(*0454*)  NA: ARRAY (.1..NRSTDNAMES.) OF ALFA=
-(*0518*)        ('GET     ', 'PUT     ', 'RESET   ', 'REWRITE ',
+ (*0511*) RSY: ARRAY (.1..RESWORDS.) OF SYMBOL =
+                ( IFSY,     DOSY,     OFSY,     TOSY,     RELOP,    ADDOP,
+ (*0512*)         ENDSY,    FORSY,    VARSY,    MULOP,    MULOP,    SETSY,
+ (*0513*)         MULOP,    NOTSY,    THENSY,   ELSESY,   WITHSY,   GOTOSY,
+ (*0514*)         CASESY,   TYPESY,   FILESY,   LOOPSY,   BEGINSY,  UNTILSY,
+ (*0515*)         WHILESY,  ARRAYSY,  CONSTSY,  LABELSY,  VALUESY,  REPEATSY,
+ (*0516*)         RECORDSY, DOWNTOSY, PACKEDSY, FORALLSY, PROGRAMSY,FUNCTSY,
+ (*0517*)         POSTSY,   PROCSY );
+ (*0454*)  NA: ARRAY (.1..NRSTDNAMES.) OF ALFA=
+ (*0518*)       ('GET     ', 'PUT     ', 'RESET   ', 'REWRITE ',
  (*0519*)        'PAGE    ', 'READ    ', 'READLN  ', 'WRITE   ',
  (*0520*)        'WRITELN ', 'TIME    ', 'DATE    ', 'NEW     ',
  (*0521*)        'MARK    ', 'RELEASE ', 'PACK    ', 'UNPACK  ',
@@ -295,7 +312,7 @@ CONST
 // $TITLE  GLOBAL TYPES
 (*0105*)TYPE
 (*0106*) 
-(*0107*)//   ALFA = PACKED ARRAY(.1..ALFALENG.) OF CHAR;
+(*0107*) //  ALFA = PACKED ARRAY(.1..ALFALENG.) OF CHAR;
 (*0108*)   LEVRANGE = 0..8; ADDRRANGE = INTEGER;
 (*0109*) 
 (*0110*) 
@@ -6664,19 +6681,15 @@ type RegType = 0..15;
 (*6359*)   END (*ENTERUNDECL*) ;
 (*6360*)
 
-PROCEDURE Date(VAR D:Alfa);
+PROCEDURE DateTime(VAR D,T:Alfa);
+var datime: tdatetime;
 begin
-  writeln('** Missing procedure DATE **');
-  readln;
-  halt(99);
+    datime := now;
+    D :=  FormatDateTime('dd mmm yy ' ,datime);
+    T :=  FormatDateTime('hh:nn:ss  ' ,datime) ;
+
   end;
-  
-PROCEDURE Time(VAR D:Alfa);
-begin
-  writeln('** Missing procedure TIME **');
-  readln;
-  halt(99);
-  end;
+
 
 (*6361*) PROCEDURE INITSCALARS;
 (*6362*)   BEGIN
@@ -6695,7 +6708,10 @@ begin
 (*6375*)     SWEOL:=TRUE; LEFT:='-';RIGHT :='-';
 (*6376*)     MAXLN := FALSE;
 (*6377*)     PAGEE:=1; FOR ZLEV:=1 TO 40 DO TTL(.ZLEV.):=' ';
-(*6378*)     ZLEV:=-1; DATE(DDATE); TIME(TTIME); PRINTED:=0;
+(*6378*)     ZLEV:=-1;
+             //DATE(DDATE); TIME(TTIME);
+             DateTime(DDATE,TTIME);
+             PRINTED:=0;
 (*6379*)     PROCLEV:=' '; MAXLINE :=MAXCHCNT; LINEE:=LINESPERPAGE-1;
 (*6380*)     ERRORTOT := 0;
 (*6381*)     DP:=TRUE;
@@ -6911,7 +6927,7 @@ begin
          //          end; end .
 (*6563*)     END;
 
-(*6564*){* $L+*)
+// (*6564*){* $L+*)
 
 (*6565*) END .
 

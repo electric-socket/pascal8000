@@ -1,0 +1,4 @@
+# .gitignore for Free Pascal
+lib/
+backup/
+*.bak
