@@ -884,7 +884,7 @@ procedure page(Var f:text); begin end;
 (*0760*)  END;
 (*0761*)  IF DP THEN LOCATION:= LC ELSE LOCATION := IC;
 (*0762*)END;(*ENDOFLINE*)
-(*0763*) PROCEDURE INSYMBOL;
+(*0763*) PROCEDURE INSYMBOL;         // Scanner
 (*0764*)  LABEL 1,2;
 (*0765*)  (*READ NEXT BASIC SYMBOL OF SOURCE PROGRAM AND RETURN ITS DESCRIPTION
   0766    IN THE GLOBAL VARIABLES SY, OP, ID, IVAL, RVAL, SVAL AND LGTH*)
@@ -944,10 +944,10 @@ procedure page(Var f:text); begin end;
 (*0816*)        UNTIL CH<>',';
 (*0817*)      END;
 (*0818*) 
-(*0819*) BEGIN (*INSYMBOL*)
+(*0819*) BEGIN (*INSYMBOL*)    // Scanner
 (*0820*) 1:
-(*0821*)  WHILE CH=' ' DO NEXTCH;
-(*0822*)  IF CHTYPE(.CH.)=LETTER THEN
+(*0821*)  WHILE CH=' ' DO NEXTCH;            // skip whitespace
+(*0822*)  IF CHTYPE(.CH.)=LETTER THEN        // if it's an identifier
 (*0823*)    BEGIN K:=0; ID:='        ';
 (*0824*)      REPEAT
 (*0825*)        IF K < ALFALENG THEN
@@ -955,7 +955,7 @@ procedure page(Var f:text); begin end;
 (*0827*)        NEXTCH;
 (*0828*)      UNTIL CHTYPE(.CH.)=SPCHAR;
 (*0829*)      FOR I := LRW(.K-1.) + 1 TO LRW(.K.) DO
-(*0830*)        IF RW(.I.) = ID THEN
+(*0830*)        IF RW(.I.) = ID THEN             // if it matches a keyword
 (*0831*)          BEGIN SY := RSY(.I.); OP := ROP(.I.); GOTO 2 END;
 (*0832*)      SY := IDENT; OP := NOOP;
 (*0833*) 2: END
@@ -1245,6 +1245,40 @@ procedure page(Var f:text); begin end;
 (*1102*) 
 // $TITLE PUTESD,PUTRLD,OBCLEAR,DATA1
 //(*1103*)PROCEDURE PUTESD(NAM:ALFA; ETYPE:0..2;CLEAR:BOOLEAN);
+          procedure fixesd;   // convert numbers in ESD to big endian
+                              // characters to ebcdic
+          begin
+              writeln;writeln('ESD writer inoperative');
+              readln;
+              halt;
+          end;
+
+          procedure fixrld;   // convert numbers in RLD to big endian
+                              // characters to ebcdic
+          begin
+              writeln;writeln('RLD writer inoperative');
+              readln;
+              halt;
+          end;
+
+          procedure fixTXT;   // convert numbers in TXT to big endian
+                              // characters to ebcdic
+          begin
+              writeln;writeln('TXT writer inoperative');
+              readln;
+              halt;
+          end;
+
+          procedure fixend;   // convert numbers in END to big endian
+                              // characters to ebcdic
+          begin
+              writeln;writeln('END writer inoperative');
+              readln;
+              halt;
+          end;
+
+
+
 type EEType = 0..2;
 
 (*1103*)PROCEDURE PUTESD(NAM:ALFA; ETYPE:EEtype;CLEAR:BOOLEAN);
@@ -1268,6 +1302,7 @@ type EEType = 0..2;
 // **FIXME** write esd
 //           SYSGO^:=CARD(ESD);
 // (*1121*)    PUT(SYSGO);
+               fixesd;
 (*1122*)  END;
 (*1123*)END; (*PUTESD*)
 (*1124*) 
@@ -1286,9 +1321,10 @@ type EEType = 0..2;
 (*1137*)  BEGIN
 (*1138*)    RLD.BYTES:=BYTE1SPACE+BYTE2SPACE+(RLDPOS-1)*8;
 { **FIXME** write RLD buffer
-(*1139*)    SYSGO^:=CARD(RLD);
-(*1140*)    PUT(SYSGO);
+  1139      SYSGO^:=CARD(RLD);
+  1140     PUT(SYSGO);
 }
+            fixrld;
             RLDPOS:=1;
 (*1141*)  END;
 (*1142*)END; (* PUTRLD *)
@@ -6765,12 +6801,12 @@ begin
 (*6428*)      ROP(.5.) := INOP; ROP(.10.) := IDIV; ROP(.11.) := IMOD;
 (*6429*)      ROP(.6.) := OROP; ROP(.13.) := ANDOP;
 (*6430*)      FOR I:=64 TO 127 DO SOP(.CHR(I).):=NOOP;
-(*6431*)     SSY(.CHR(173).):=LBRACK;                                                   
-(*6432*)     SSY(.CHR(189).):=RBRACK;                                                   
+(*6431*)     SSY(.CHR(173).):=LBRACK;   // $AD Y OVERBAF
+(*6432*)     SSY(.CHR(189).):=RBRACK;   // $BD
 (*6433*)     SSY(.'&'.):=MULOP;                                                         
-(*6434*)     SSY(.CHR(79).):=ADDOP;                                                     
+(*6434*)     SSY(.CHR(79).):=ADDOP;     // $4F | HORIZZ. BAR
 (*6435*)     SOP(.'&'.):=ANDOP;                                                         
-(*6436*)     SOP(.CHR(79).):=OROP;                                                      
+(*6436*)     SOP(.CHR(79).):=OROP;
 (*6437*)      SOP(.'+'.) := PLUS;SOP(.'-'.) := MINUS;SOP(.'*'.) := MUL;SOP(.'/'.) := RDIV;
 (*6438*)      SOP(.'='.):=EQOP;
 (*6439*)      FOR I:=0 TO 255 DO CHTYPE(.CHR(I).):=SPCHAR;
@@ -6796,6 +6832,7 @@ begin
 (*6458*)        PUTRLD(2,1,0,TRUE);
 (*6459*)        ENDC.LENGTH := CURRADDRESS;
 (*6460*)       { SYSGO^:=CARD(ENDC);  }
+               FIXEND;
                  Write(sysgo,card(endc)); //  PR fix
 (*6461*)      //  PUT(SYSGO);
                 CURRADDRESS:=0; ESDID:=1; ESDCNT:=0;
@@ -6856,7 +6893,11 @@ begin
 (*6509*) 
 (*6510*) 
 (*6511*)    REWRITE(SYSGO);
-(*6512*)    INSYMBOL;
+(*6512*)    INSYMBOL;                 // get the first symbol
+
+               // LABEL,CONST,TYPE,VAR,VALUE,PROC,FUNCT, BEGIN
+               // BEGIN,GOTO,IF,WHILE,REPEAT,LOOP,FOR,FORALL,WITH
+(*6411*)
 (*6513*)    PROGRAMME(BLOCKBEGSYS+STATBEGSYS-(.CASESY.));
 (*6514*) 
 (*6515*)9999:

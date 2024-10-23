@@ -4,20 +4,20 @@
     <PathDelim Value="\"/>
     <Version Value="12"/>
     <BuildModes Active="Default"/>
-    <Units Count="6">
+    <Units Count="7">
       <Unit0>
         <Filename Value="AAEC_COMPILER.pas"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="253"/>
-        <CursorPos X="65" Y="263"/>
-        <UsageCount Value="86"/>
+        <TopLine Value="961"/>
+        <CursorPos X="15" Y="963"/>
+        <UsageCount Value="155"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="C:\Program Files\Hercules\Hercules 3.07 (64 Bit)\pascal\pascref.mac"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="27"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit1>
       <Unit2>
@@ -25,7 +25,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="127"/>
         <CursorPos X="73" Y="97"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="27"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit2>
       <Unit3>
@@ -34,142 +34,148 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="166"/>
         <CursorPos Y="173"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="27"/>
       </Unit3>
       <Unit4>
         <Filename Value="compiler.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2643"/>
         <CursorPos X="27" Y="2678"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="5"/>
       </Unit4>
       <Unit5>
         <Filename Value="Pascal8000LinkEdit.pas"/>
         <EditorIndex Value="1"/>
         <TopLine Value="391"/>
         <CursorPos X="13" Y="407"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
       </Unit5>
+      <Unit6>
+        <Filename Value="bytelocation.pas"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="3"/>
+      </Unit6>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="196" Column="35" TopLine="179"/>
+        <Filename Value="Pascal8000LinkEdit.pas"/>
+        <Caret Line="412" Column="63" TopLine="396"/>
       </Position1>
       <Position2>
-        <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="197" Column="36" TopLine="180"/>
+        <Filename Value="Pascal8000LinkEdit.pas"/>
+        <Caret Line="1159" Column="20"/>
       </Position2>
       <Position3>
-        <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="211" Column="36" TopLine="194"/>
+        <Filename Value="Pascal8000LinkEdit.pas"/>
+        <Caret Line="2" Column="61"/>
       </Position3>
       <Position4>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="215" Column="36" TopLine="198"/>
+        <Caret Line="254" Column="20" TopLine="240"/>
       </Position4>
       <Position5>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="286" Column="47" TopLine="269"/>
+        <Caret Line="253" Column="38" TopLine="243"/>
       </Position5>
       <Position6>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="301" Column="12" TopLine="227"/>
+        <Caret Line="170" Column="52" TopLine="161"/>
       </Position6>
       <Position7>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="245" Column="22" TopLine="235"/>
       </Position7>
       <Position8>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="237" Column="3" TopLine="220"/>
+        <Caret Line="97" Column="23" TopLine="80"/>
       </Position8>
       <Position9>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="238" Column="25" TopLine="225"/>
+        <Caret Line="252" Column="39" TopLine="240"/>
       </Position9>
       <Position10>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="235" Column="2" TopLine="224"/>
+        <Caret Line="2444" Column="24"/>
       </Position10>
       <Position11>
-        <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="233" Column="12" TopLine="224"/>
+        <Filename Value="Pascal8000LinkEdit.pas"/>
+        <Caret Column="23"/>
       </Position11>
       <Position12>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="237" Column="37" TopLine="227"/>
+        <Caret Line="153" Column="6" TopLine="151"/>
       </Position12>
       <Position13>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="253" Column="20" TopLine="235"/>
+        <Caret Line="263" Column="54" TopLine="319"/>
       </Position13>
       <Position14>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="248" Column="26" TopLine="238"/>
+        <Caret Line="264" Column="74" TopLine="253"/>
       </Position14>
       <Position15>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="249" Column="48" TopLine="236"/>
+        <Caret Line="6799" Column="23"/>
       </Position15>
       <Position16>
-        <Filename Value="Pascal8000LinkEdit.pas"/>
+        <Filename Value="AAEC_COMPILER.pas"/>
+        <Caret Line="3" Column="25"/>
       </Position16>
       <Position17>
-        <Filename Value="Pascal8000LinkEdit.pas"/>
-        <Caret Line="412" Column="63" TopLine="396"/>
+        <Filename Value="AAEC_COMPILER.pas"/>
+        <Caret Line="1322" Column="34" TopLine="1304"/>
       </Position17>
       <Position18>
-        <Filename Value="Pascal8000LinkEdit.pas"/>
-        <Caret Line="1159" Column="20"/>
+        <Filename Value="AAEC_COMPILER.pas"/>
+        <Caret Line="2" Column="18"/>
       </Position18>
       <Position19>
-        <Filename Value="Pascal8000LinkEdit.pas"/>
-        <Caret Line="2" Column="61"/>
+        <Filename Value="AAEC_COMPILER.pas"/>
+        <Caret Line="6773" Column="90"/>
       </Position19>
       <Position20>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="254" Column="20" TopLine="240"/>
+        <Caret Line="4" Column="4"/>
       </Position20>
       <Position21>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="253" Column="38" TopLine="243"/>
+        <Caret Line="463" Column="36" TopLine="446"/>
       </Position21>
       <Position22>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="170" Column="52" TopLine="161"/>
+        <Caret Line="6812" Column="40" TopLine="6804"/>
       </Position22>
       <Position23>
         <Filename Value="AAEC_COMPILER.pas"/>
+        <Caret Line="6897" Column="34" TopLine="6878"/>
       </Position23>
       <Position24>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="97" Column="23" TopLine="80"/>
+        <Caret Line="111" Column="26"/>
       </Position24>
       <Position25>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="252" Column="39" TopLine="240"/>
+        <Caret Line="592" Column="60" TopLine="584"/>
       </Position25>
       <Position26>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="2444" Column="24"/>
+        <Caret Line="6900" Column="45" TopLine="6890"/>
       </Position26>
       <Position27>
-        <Filename Value="Pascal8000LinkEdit.pas"/>
-        <Caret Column="23"/>
+        <Filename Value="AAEC_COMPILER.pas"/>
+        <Caret Line="6784" Column="27" TopLine="6780"/>
       </Position27>
       <Position28>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="153" Column="6" TopLine="151"/>
+        <Caret Line="6896" Column="21" TopLine="6883"/>
       </Position28>
       <Position29>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="263" Column="54" TopLine="319"/>
+        <Caret Line="111" Column="26" TopLine="101"/>
       </Position29>
       <Position30>
         <Filename Value="AAEC_COMPILER.pas"/>
-        <Caret Line="264" Column="74" TopLine="253"/>
+        <Caret Line="463" Column="36" TopLine="446"/>
       </Position30>
     </JumpHistory>
     <RunParams>

@@ -1,11 +1,7 @@
 program bytelocation;
  var l:longint;
     k:word;
-
-
-
-
-    bl:array[0..3] of byte absolute l;
+      bl:array[0..3] of byte absolute l;
 
 
 begin
@@ -78,6 +74,9 @@ begin
     write('l=',l,' internally it''s ');
     for k:= 0 to 3 do write(bl[k],' ');
     writeln;
+      l :=ORD(' ')*256*65536;
+    write('Byte1Space=' ,l,' ');
+    for k:= 0 to 3 do write(bl[k],' ');
 
 
       writeln;

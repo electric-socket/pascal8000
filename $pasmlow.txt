@@ -1,0 +1,136 @@
+  1: Error in simple type
+  2: Identifier expected
+  3: 'Program' expected
+  4: ')' Expected
+  5: ':' Expected
+  6: Illegal symbol
+  7: Error in parameter list
+  8: 'OF' expected
+  9: '(' Expected
+ 10: Error in type
+ 11: '(.' Expected
+ 12: '.)' Expected
+ 13: 'END' expected
+ 14: ';' Expected
+ 15: Integer expected
+ 16: '-' Expected
+ 17: 'BEGIN' expected
+ 18: Error in declaration part
+ 19: Error in field-list
+ 50: Error in constant
+ 51: ':=' Expected
+ 52: 'THEN' expected
+ 53: 'UNTIL' expected
+ 54: 'DO' expected
+ 55: 'TO'/'DOWNTO' expected
+ 58: Error in factor
+ 59: Error in variable
+ 60: 'IN' expected
+101: Identifier declared twice
+102: Low bound exceeds high bound
+103: Identifier is not of appropriate class
+104: Identifier not declared
+105: Sign not allowed
+106: Number expected
+107: Incompatible subrange types
+108: File not allowed here
+109: Type must not be real
+110: Tagfield type must be scalar or subrange
+111: Incompatible with tagfield type
+112: Index type must not be real
+113: Index type must be scalar or subrange
+114: Base type must not be real
+115: Base type must be scalar or subrange
+116: Error in type of standard procedure parameter
+117: Unsatisfied forward reference
+118: Unpacking/packing is of no use; check array elements.
+119: Forward declared: repetition of parameter list not allowed
+120: Function result type must be scalar, subrange or pointer
+121: File value parameter not allowed
+122: Forward declared function: do not repeat result type
+123: Missing result type in function declaration
+124: F-format for real only
+125: Error in type of standard function parameter
+126: Number of parameters does not agree with declaration
+127: Illegal parameter substitution
+128: Result  type  of  parameter  function  doesn't  agree with declaration
+129: Type conflict of operands
+130: Expression is not of set type
+131: Tests on equality allowed only
+132: Strict inclusion not allowed
+133: File comparison not allowed
+134: Illegal type of operand(s)
+135: Type of operand must be boolean
+136: Set element type must be scalar or subrange
+137: Set element types not compatible
+138: Type of variable is not array
+139: Index type is not compatible with declaration
+140: Type of variable is not record
+141: Type of variable must be file or pointer
+142: Type conflict on parameters
+143: Illegal type of loop control variable
+144: Selector type must be scalar or subrange
+145: Type conflict with control variable
+146: Assignment of files not allowed
+147: Label type incompatible with selecting expression
+148: Subrange bounds must be scalar
+149: Index type must not be integer
+150: Assignment to standard function is not allowed
+151: Assignment to formal function is not allowed
+152: No such field in this record
+153: Type error in read
+154: Actual parameter must be a variable
+155: Control variable must not be formal
+156: Multidefined case label
+158: Missing corresponding variant declaration
+159: Real or string tagfields not allowed
+160: Mismatch to forward declaration
+161: Again forward declared
+162: External routines cannot be forward
+164: Substitution of standard proc/func not allowed
+165: Multidefined label
+166: Multideclared label
+167: Undeclared label
+168: Undefined label
+169: Error in base type
+170: Procedure/function parameter must have value parameters only
+172: Undeclared external file
+175: Missing file 'INPUT' in program heading
+176: Missing file 'OUTPUT' in program heading
+180: Too long source line
+181: Tagfield value out of range
+182: Assignment to subordinate function name not allowed
+184: Too long file component
+186: Mismatch to procedure skeleton
+187: Packed variable is not allowed in variable parameter
+201: Error in real constant: digit expected
+202: String constant must not exceed source line
+203: Integer constant exceeds range
+220: Variable initialization only allowed in main program
+221: Type conflict in variable initialization
+222: No. of components of struc. constant doesn't agree with declaration
+223: Type of components of struc. const. doesn't agree with declaration
+224: Illegal format in structured constant
+225: '*)' Expected
+226: Unallowed type in structured constant
+227: Record with variants not allowed in structured constant
+250: Too many nested scopes of identifiers
+251: Too many nested procedures and/or functions
+253: Procedure too long
+255: Too many errors on this source line
+261: Too many procedures or long jumps
+280: Event name not declared
+281: No postlude statement allowed for the event 'EXIT'
+282: Multidefined postlude statement
+291: Extension to 'Standard' Pascal. Be warned.
+292: Cannot change type of constant. Sorry.
+300: "VALUE" statement not allowed for external compilation
+302: Index expression out of bounds
+303: Value to be assigned is out of bounds
+304: Element expression out of range
+305: "NIL" is the only pointer initialisation allowed
+380: Cannot pass procs/functs to externally compiled routines.
+381: Illegal result type for external function
+382: Cannot reset the (*$E*) option once set.
+399: Not implemented
+400: Compiler error
